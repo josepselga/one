@@ -629,6 +629,7 @@ int Datastore::insert(SqlDB *db, string& error_str)
 
     string safe_dirs;
     string restricted_dirs;
+    string restic_password; // Move the declaration here
 
     ostringstream oss;
 
@@ -711,7 +712,6 @@ int Datastore::insert(SqlDB *db, string& error_str)
     //--------------------------------------------------------------------------
     // Sanitize RESTIC_PASSWORD
     //--------------------------------------------------------------------------
-    string restic_password;
     get_template_attribute("RESTIC_PASSWORD", restic_password);
 
     if (!restic_password.empty())
