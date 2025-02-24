@@ -707,6 +707,24 @@ int Datastore::insert(SqlDB *db, string& error_str)
         replace_template_attribute("SAFE_DIRS", "/var/tmp");
         replace_template_attribute("RESTRICTED_DIRS", "/");
     }
+    
+    //--------------------------------------------------------------------------
+    // Sanitize RESTIC_PASSWORD
+    //--------------------------------------------------------------------------
+    string restic_password;
+    get_template_attribute("RESTIC_PASSWORD", restic_password);
+
+    if (!restic_password.empty())
+    {
+        // Remove " or ' if they are at the start and end of the string
+        if ((restic_password.front() == '"' && restic_password.back() == '"') ||
+            (restic_password.front() == '\'' && restic_password.back() == '\''))
+        {
+            restic_password = restic_password.substr(1, restic_password.size() - 2);
+        }
+
+        replace_template_attribute("RESTIC_PASSWORD", restic_password);
+    }
 
     // Encrypt all the secrets
     encrypt();
