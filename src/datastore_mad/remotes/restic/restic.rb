@@ -97,7 +97,7 @@ class Restic
 
         @restic_bin = RESTIC_BIN_PATHS[@options[:host_type]]
 
-        @passwd = @doc.elements["#{prefix}TEMPLATE/RESTIC_PASSWORD"].text.delete(%("'))
+        @passwd = "hola1234" # TEST EXAMPLE
 
         @bwlimit = safe_get("#{prefix}TEMPLATE/RESTIC_BWLIMIT", -1)
         @maxproc = Integer(safe_get("#{prefix}TEMPLATE/RESTIC_MAXPROC", -1))
