@@ -716,13 +716,8 @@ int Datastore::insert(SqlDB *db, string& error_str)
 
     if (!restic_password.empty())
     {
-        // Remove " or ' if they are at the start and end of the string
-        if ((restic_password.front() == '"' && restic_password.back() == '"') ||
-            (restic_password.front() == '\'' && restic_password.back() == '\''))
-        {
-            restic_password.erase(0, 1);
-            restic_password.erase(restic_password.size() - 1);
-        }
+        restic_password.erase(0, 1);
+        restic_password.erase(restic_password.size() - 1);
         replace_template_attribute("RESTIC_PASSWORD", restic_password);
     }
 
