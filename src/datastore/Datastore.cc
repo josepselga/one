@@ -720,9 +720,9 @@ int Datastore::insert(SqlDB *db, string& error_str)
         if ((restic_password.front() == '"' && restic_password.back() == '"') ||
             (restic_password.front() == '\'' && restic_password.back() == '\''))
         {
-            restic_password = restic_password.substr(1, restic_password.size() - 2);
+            restic_password.erase(0, 1);
+            restic_password.erase(restic_password.size() - 1);
         }
-        restic_password = "hola1234";
         replace_template_attribute("RESTIC_PASSWORD", restic_password);
     }
 
